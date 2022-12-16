@@ -1,0 +1,28 @@
+{
+  "name": "warp-arweave-signatures",
+  "version": "0.1.0",
+  "main": "index.js",
+  "dependencies": {
+    "arlocal": "1.1.42",
+    "arweave": "1.11.4",
+    "ramda": "^0.28.0",
+    "replace-in-file": "^6.3.5",
+    "warp-contracts": "^1.2.24"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "scripts": {
+    "test": "yarn build && mocha",
+    "build": "yarn clean && node build.js && npm run cp",
+    "clean": "rimraf ./dist",
+    "cp": "copyfiles -u 1 ./src/**/*.json dist",
+    "start": "yarn build && node scripts/runNode.js"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "copyfiles": "^2.4.1",
+    "esbuild": "^0.14.46",
+    "mocha": "^10.0.0"
+  }
+}
