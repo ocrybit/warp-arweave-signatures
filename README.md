@@ -27,7 +27,8 @@ yarn start
 In another terminal, start the local app.
 
 ```bash
-cd warp-arweave-signatures
+cd warp-arweave-signatures/browser
+yarn
 yarn dev
 ```
 
