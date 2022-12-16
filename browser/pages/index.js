@@ -132,7 +132,6 @@ export default () => {
           sx={{
             cursor: "pointer",
             ":hover": { opacity: 0.75 },
-            borderRadius: "0 3px 3px 0",
           }}
           py={1}
           px={4}
@@ -157,11 +156,6 @@ export default () => {
               saltLength: 32,
             })
             const signature = Buffer.from(sig).toString("hex")
-            const isValid = await arweave.crypto.verify(
-              pubKey,
-              encoded,
-              Buffer.from(signature, "hex")
-            )
             await warp.writeInteraction({
               pubKey,
               message,
@@ -174,7 +168,41 @@ export default () => {
           }}
           justify="center"
         >
-          Sign
+          Sign with ArConnect
+        </Flex>
+        <Flex
+          align="center"
+          sx={{
+            cursor: "pointer",
+            ":hover": { opacity: 0.75 },
+            borderRadius: "0 3px 3px 0",
+          }}
+          py={1}
+          px={4}
+          bg="#ddd"
+          onClick={async () => {
+            if (/^\s*$/.test(message)) {
+              alert("enter message")
+              return
+            }
+            const enc = new TextEncoder()
+            const encoded = enc.encode(message)
+            const arweave_wallet = await arweave.wallets.generate()
+            const sig = await arweave.crypto.sign(arweave_wallet, encoded)
+            const signature = Buffer.from(sig).toString("hex")
+            await warp.writeInteraction({
+              pubKey: arweave_wallet.n,
+              message,
+              signature,
+              src: "Browser",
+            })
+            setMessage("")
+            let data = (await warp.readState()).cachedValue.state.verify
+            setVerify(await _verify(data))
+          }}
+          justify="center"
+        >
+          Sign with Random Wallet
         </Flex>
       </Flex>
     </ChakraProvider>
