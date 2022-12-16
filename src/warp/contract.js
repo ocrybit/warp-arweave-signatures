@@ -1,6 +1,5 @@
 export async function handle(state, action) {
   try {
-    const crypto = SmartWeave.arweave.wallets.crypto
     const { pubKey, message, signature, src } = action.input
     const enc = new TextEncoder()
     const encoded = enc.encode(message)
