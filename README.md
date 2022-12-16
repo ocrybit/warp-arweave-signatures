@@ -21,7 +21,7 @@ Clone the repo and run ArLocal and REPL. It auto-deploys a warp contract.
 git clone https://github.com/ocrybit/warp-arweave-signatures.git
 cd warp-arweave-signatures
 yarn
-yarn run
+yarn start
 ```
 
 In another terminal, start the local app.

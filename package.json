@@ -17,7 +17,7 @@
     "build": "yarn clean && node build.js && npm run cp",
     "clean": "rimraf ./dist",
     "cp": "copyfiles -u 1 ./src/**/*.json dist",
-    "run": "yarn build && node scripts/runNode.js"
+    "start": "yarn build && node scripts/runNode.js"
   },
   "devDependencies": {
     "chai": "^4.3.6",
